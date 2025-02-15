@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otherlens</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <h1>Welcome to Otherlens!</h1>
+    <p>See the world through other's eyes</p>
+
+    
+    <p>Welcome to Other Lens. We are a website dedicated to improving awareness of visual disabilities. The three visual disabilities that we focus on are Colorblindness, Cataracts, and Glaucoma. Visual disabilities affect a large portion of the global population. However, many people are not aware of these disabilities, and often, there are many misconceptions. Our website aims to answer these questions and grow awareness of visual disabilities and how they affect those who have them.</p>
+
+
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        
+
+    
+    <p>
+        <h2>About Otherlens: Our Mission</h2>
+        <p>At otherlens, we want people to what the world looks like through, well, other lenses! We want to raise awareness on how people with different visual disabilities see the world. By doing this, not only are we clearing up misconceptions about visual disabilties, but we are giving people a vessel to reach people with visual disabilities, and help raise awareness. For example, artists can use our website to create artworks reaching out to the visually disabled or raise awarness through their art. </p>
+
+
+        
+    </p>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+
+
+  <form> 
+
+    
+      
+
+
+
+      <h2>Glaucoma</h2>
+      <p>Our eyes are constantly creating a liqud called the 'aqeous humour'. As new liquid flows into
+      our eyes, the old liquid usually drains out, through an area called the 'drainage angle'. This             process keeps our eye pressure stable, allowing our eyes to function properly. If the drainage angle
+      is not working correctly, it creates a fluid buildup, which increases the pressure inside the eye,  ultimately damaging the optic nerve. As the nerve fibers within the optic nerve die out, it affects tehe quality of the vision, blinding more and more areas out. </p>
+
+
+
+      <center><img src="https://static.wixstatic.com/media/09fea1_2d66a61091cb409482e30ef9cce7eeaa~mv2.gif" alt="alternatetext" height = '200' width ='360'> </center>
+
+
+
+      
+ <center>
+     <label for "name"> Enter a prompt in the textbox below:</label> 
+ </center>
+      <p>Once the image is generated, you can also see how different levels of severity affect vision, by using the severity slider:</p>
+
+<center>
+      <div class="slidecontainer">
+        <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
+      </div>
+</center>
+
+      
+    <br>
+       <center>  <input type="text" id="glaucoma" placeholder="i.e. Image of a dog through the lens of someone with glaucoma"></center>
+
+
+      
+      <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      <br>
+
+      <h2>Colorblindness</h2>
+      <p>Those with colorblindness see colors different than those without it.Colorblindness makes it hard to tell the difference between certain colors. Within our eyes, there are different types off cells called rods and cones which detect light. Cone cells are the ones which help us distinguish different colors. Color blindness occurs when when one or more cone cells are absent. The severity of the colorblindness depends on the amount of cone cells missing. There are three different degrees of colorblindness .... </p>
+
+
+    <h2>Colorblindness Image Simulation</h2>
+
+
+      <img id="presetImage" src="https://s3.wp.wsu.edu/uploads/sites/3165/2022/11/Campus-Night-View_7754-1900x1252-1.jpg" style="display:none;"/>
+
+      <canvas id="imageCanvas"></canvas>
+
+      <center>
+      <div class="controls">
+          <label><input type="checkbox" id="toggleRed"> Eliminate Red</label><br>
+          <label><input type="checkbox" id="toggleGreen"> Eliminate Green</label><br>
+          <label><input type="checkbox" id="toggleBlue"> Eliminate Blue</label><br>
+          <button onclick="applyChanges()">Apply Changes</button>
+      </div>
+          </center>
+
+
+
+        <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        <br>
+
+
+
+      
+
+
+<h2>Raising Awareness Through Art</h2>
+      <p>Below, we provide some tools to help new artists create artworks incorporating visual disabilities or raising awareness!  </p>
+
+<p>Choose colors you would like to incorporate into your art. The colors we have provided allow people with all visual disabilities to experience art. We have not provided red, green, blue, and yellow, as those who are colorblind are not able to see those colors. </p>
+
+    <center><select>
+        <option value="option1">Black</option>
+        <option value="option2">White</option>
+        <option value="option3">Purple</option>
+        <option value="option4">Turquoise</option>
+        <option value="option5">Orange</option>
+      </select></center>
+
+      <center><select>
+          <option value="option1">Black</option>
+          <option value="option2">White</option>
+          <option value="option3">Purple</option>
+          <option value="option4">Turquoise</option>
+          <option value="option5">Orange</option>
+        </select></center>
+
+
+      <center><select>
+              <option value="option1">Black</option>
+              <option value="option2">White</option>
+              <option value="option3">Purple</option>
+              <option value="option4">Turquoise</option>
+              <option value="option5">Orange</option>
+            </select></center>
+
+<p> Choose the visual disability you would like to incorporate</p>
+      <center><select>
+          <option value="option1">Glaucoma</option>
+          <option value="option2">Colorblindness</option>
+          <option value="option3">Cataracts</option>
+        </select></center>
+
+<p>Type in other things you would like to include, and generative AI will give you a few ideas to incorporate into your artwork</p>
+
+
+       <center>  <input type="text" id="AI Prompt" placeholder="i.e. Have it be abstract...include geometric shapes"></center>
+
+      
+    
+      
+  </form>
+</html> 
