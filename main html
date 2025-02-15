@@ -91,19 +91,83 @@
 
     <h2>Colorblindness Image Simulation</h2>
 
-
       <img id="presetImage" src="https://s3.wp.wsu.edu/uploads/sites/3165/2022/11/Campus-Night-View_7754-1900x1252-1.jpg" style="display:none;"/>
 
       <canvas id="imageCanvas"></canvas>
 
-      <center>
       <div class="controls">
+          <center>
           <label><input type="checkbox" id="toggleRed"> Eliminate Red</label><br>
           <label><input type="checkbox" id="toggleGreen"> Eliminate Green</label><br>
           <label><input type="checkbox" id="toggleBlue"> Eliminate Blue</label><br>
           <button onclick="applyChanges()">Apply Changes</button>
-      </div>
           </center>
+      </div>
+
+      <script>
+          const image = document.getElementById('presetImage');
+          const canvas = document.getElementById('imageCanvas');
+          const ctx = canvas.getContext('2d');
+
+          image.onload = () => {
+
+              canvas.width = image.width;
+              canvas.height = image.height;
+
+              ctx.drawImage(image, 0, 0);
+          };
+
+          function applyChanges() {
+              const red = document.getElementById('toggleRed').checked;
+              const green = document.getElementById('toggleGreen').checked;
+              const blue = document.getElementById('toggleBlue').checked;
+
+
+              const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+              const data = imgData.data;
+
+
+              for (let i = 0; i < data.length; i += 4) {
+                  let r = data[i];     // Red
+                  let g = data[i + 1]; // Green
+                  let b = data[i + 2]; // Blue
+
+                  if (red) {
+                      const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+                      data[i] = gray; 
+                  }
+
+                  if (green) {
+                      const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+                      data[i + 1] = gray; 
+                  }
+
+                  if (blue) {
+                      const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+                      data[i + 2] = gray; 
+                  }
+              }
+
+              // 
+              ctx.putImageData(imgData, 0, 0);
+          }
+      </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
 
 
