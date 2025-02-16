@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Impairment Effects</title>
+    <style>
+        #image-container {
+            position: relative;
+            display: inline-block;
+        }
+        #uploaded-image {
+            max-width: 100%;
+            height: auto;
+            transition: filter 0.3s ease;
+        }
+        .glaucoma-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            mask-image: radial-gradient(circle, transparent 40%, black 60%);
+            -webkit-mask-image: radial-gradient(circle, transparent 40%, black 60%);
+            pointer-events: none;
+        }
+        .slidecontainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulating Vision Impairment Effects</h1>
+    <input type="file" id="file-input" accept="image/*">
+    <div id="image-container">
+        <img id="uploaded-image" src="" alt="Uploaded Image">
+        <div class="glaucoma-effect" id="glaucoma-effect"></div>
+    </div>
+    <center>
+        <p>Select an effect:</p>
+        <input type="radio" id="glaucoma" name="effect" value="glaucoma" checked>
+        <label for="glaucoma">Glaucoma</label>
+        <input type="radio" id="cataract" name="effect" value="cataract">
+        <label for="cataract">Cataract</label>
+    </center>
+    <center>
+        <label for="myRange">Adjust the severity of the effect using the slider.</label>
+    </center>
+    <center>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+            <p>Effect Level: <span id="severityText">Mild</span></p>
+        </div>
+    </center>
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const uploadedImage = document.getElementById('uploaded-image');
+        const glaucomaEffect = document.getElementById('glaucoma-effect');
+        const slider = document.getElementById("myRange");
+        const severityText = document.getElementById("severityText");
+        const effectRadios = document.getElementsByName("effect");
+
+        function updateEffect() {
+            const effect = document.querySelector('input[name="effect"]:checked').value;
+            const severity = slider.value;
+            
+            if (effect === "glaucoma") {
+                let clearCircleSize = 50 - severity * 0.4; 
+                glaucomaEffect.style.maskImage = `radial-gradient(circle, transparent ${clearCircleSize}%, black 80%)`;
+                glaucomaEffect.style.webkitMaskImage = `radial-gradient(circle, transparent ${clearCircleSize}%, black 80%)`;
+                glaucomaEffect.style.display = 'block';
+                uploadedImage.style.filter = "none";
+            } else if (effect === "cataract") {
+                uploadedImage.style.filter = `blur(${severity / 10}px) brightness(${1 - severity * 0.005})`;
+                glaucomaEffect.style.display = 'none';
+            }
+
+            severityText.innerText = severity <= 20 ? "Mild" : severity <= 60 ? "Moderate" : "Severe";
+        }
+
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    uploadedImage.src = event.target.result;
+                    uploadedImage.style.display = 'block';
+                    uploadedImage.onload = updateEffect;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please select a valid image file.");
+            }
+        });
+
+        slider.oninput = updateEffect;
+        effectRadios.forEach(radio => radio.addEventListener("change", updateEffect));
+
+        updateEffect();
+    </script>
+</body>
+</html>
