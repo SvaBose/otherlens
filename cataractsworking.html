@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glaucoma Effect</title>
+    <style>
+        #image-container {
+            position: relative;
+            display: inline-block;
+        }
+        #uploaded-image {
+            max-width: 100%;
+            height: auto;
+            transition: filter 0.3s ease; /* Smooth transition for blur */
+        }
+        .slidecontainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Glaucoma Effect on Image</h1>
+
+    <!-- File upload form -->
+    <input type="file" id="file-input" accept="image/*">
+
+    <div id="image-container">
+        <img id="uploaded-image" src="" alt="Uploaded Image">
+    </div>
+
+    <center>
+        <label for="myRange">You can change the severity of the glaucoma using the slider.</label>
+    </center>
+
+    <center>
+        <div class="slidecontainer">
+            <input type="range" min="0" max="10" value="0" class="slider" id="myRange">
+            <p>Blurriness Level: <span id="severityText">None</span></p>
+        </div>
+    </center>
+
+    <script>
+        // Get the file input, image, and slider elements
+        const fileInput = document.getElementById('file-input');
+        const uploadedImage = document.getElementById('uploaded-image');
+        const slider = document.getElementById("myRange");
+        const severityText = document.getElementById("severityText");
+
+        // Update the blur level based on the slider value
+        function updateBlur() {
+            const blurValue = slider.value;
+            uploadedImage.style.filter = `blur(${blurValue}px)`; // Adjust the blur effect based on slider value
+
+            // Update the severity text based on the slider value
+            if (blurValue === "0") {
+                severityText.innerText = "None";
+            } else if (blurValue <= 3) {
+                severityText.innerText = "Mild Blurriness";
+            } else if (blurValue <= 6) {
+                severityText.innerText = "Moderate Blurriness";
+            } else {
+                severityText.innerText = "High Blurriness";
+            }
+        }
+
+        // Initialize the effect when the image is loaded
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    uploadedImage.src = event.target.result;
+                    uploadedImage.style.display = 'block';
+
+                    // Wait for the image to load before applying the effect
+                    uploadedImage.onload = function () {
+                        updateBlur(); // Initialize the blur based on the initial slider value
+                    };
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please select a valid image file.");
+            }
+        });
+
+        // Call updateBlur when the slider changes
+        slider.oninput = updateBlur;
+
+        // Initial setup
+        updateBlur();
+    </script>
+</body>
+</html>
+
