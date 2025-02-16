@@ -1,1 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otherlens</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="herosection">
+        <div class="herocontent">
+            <h1>Welcome to Otherlens!</h1>
+            <p class="subtitle">See the world through other's eyes</p>
+            <a href="#about" class="learnbutton">Learn More</a>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+    <h1>Welcome to Otherlens!</h1> 
+        <center>
+    <p> Created by Zubair Syed, Svanik Bose, Justin Tang, & Ahmad Alssalem</p>
+            </center>
+<p>We are a website dedicated to improving awareness of visual disabilities. The three visual disabilities that we focus on are Colorblindness, Cataracts, and Glaucoma. Visual disabilities affect a large portion of the global population. However, many people are not aware of these disabilities, and often, there are many misconceptions. Our website aims to answer these questions and grow awareness of visual disabilities and how they affect those who have them.</p>
+    </section>
+
+<section class="missionsection">
+        <h2>About Otherlens: Our Mission</h2>
+        <p>At otherlens, we want people to what the world looks like through, well, other lenses! We want to raise awareness on how people with different visual disabilities see the world. By doing this, not only are we clearing up misconceptions about visual disabilties, but we are giving people a vessel to reach people with visual disabilities, and help raise awareness. For example, artists can use our website to create artworks reaching out to the visually disabled or raise awarness through their art. </p>
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+
+
+<form>
+
+
+
+
+
+    <section class="glaucomasection">
+    <h2>Glaucoma</h2>
+    <p>Our eyes are constantly creating a liqud called the 'aqeous humour'. As new liquid flows into
+        our eyes, the old liquid usually drains out, through an area called the 'drainage angle'. This process keeps our
+        eye pressure stable, allowing our eyes to function properly. If the drainage angle
+        is not working correctly, it creates a fluid buildup, which increases the pressure inside the eye, ultimately
+        damaging the optic nerve. As the nerve fibers within the optic nerve die out, it affects tehe quality of the
+        vision, blinding more and more areas out. </p>
+
+
+
+    <center><img src="https://static.wixstatic.com/media/09fea1_2d66a61091cb409482e30ef9cce7eeaa~mv2.gif"
+            alt="alternatetext" height='200' width='360'> </center>
+
+
+
+
+    <style>
+        #image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        #uploaded-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .glaucoma-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            mask-image: radial-gradient(circle, transparent 25%, black 25%);
+            -webkit-mask-image: radial-gradient(circle, transparent 25%, black 25%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .slidecontainer {
+            margin-top: 20px;
+        }
+    </style>
+    </head>
+    </section>
+    <body>
+
+
+
+
+
+
+
+        <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        <br>
+        <section class="section colorblindsection">
+         <h2>Colorblindness</h2>
+        <p>Those with colorblindness see colors different than those without it.Colorblindness makes it hard to tell the
+            difference between certain colors. Within our eyes, there are different types off cells called rods and
+            cones which detect light. Cone cells are the ones which help us distinguish different colors. Color
+            blindness occurs when when one or more cone cells are absent. The severity of the colorblindness depends on
+            the amount of cone cells missing. There are three different degrees of colorblindness. Some people with mild
+            color blindness usually see colors in good lighting, but struggle to see colors in dimmer or worse lighting.
+            Others cannot tell apart certain colors, such as red, green and blue, in any light. The most severe degree
+            of color blindness is when a person sees everything in gray. However, this is uncommon. </p>
+            </section>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <section class="section colorblindsimsection">
+        <h1>Colorblindness Simulator</h1>
+        <p>Below, we have provided a way for you to upload a file and see how colorblind people see the world. You can eliminate different
+            colors in the image. Eliminating all three colors will make the image completely gray. </p>
+
+
+
+
+
+
+            <style>
+                .canvas-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 20px;
+                }
+            </style>
+            </head>
+            <body>
+            <center>
+                <input type="file" id="imageUpload" accept="image/*"><br><br>
+                <div class="canvas-container">
+                    <canvas id="imageCanvas"></canvas>
+                </div>
+                <div class="controls">
+                    <label><input type="checkbox" id="toggleRed"> Eliminate Red</label><br>
+                    <label><input type="checkbox" id="toggleGreen"> Eliminate Green</label><br>
+                    <label><input type="checkbox" id="toggleBlue"> Eliminate Blue</label><br>
+                </div>
+            </center>
+
+            <script>
+                window.onload = function () {
+                    const canvas = document.getElementById('imageCanvas');
+                    const ctx = canvas.getContext('2d');
+                    const imageUpload = document.getElementById('imageUpload');
+                    let originalImageData = null;
+
+                    // Handle image upload
+                    imageUpload.addEventListener('change', function (event) {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                const image = new Image();
+                                image.onload = function () {
+                                    const maxWidth = 500;
+                                    const aspectRatio = image.width / image.height;
+                                    const newWidth = maxWidth;
+                                    const newHeight = newWidth / aspectRatio;
+
+                                    canvas.width = newWidth;
+                                    canvas.height = newHeight;
+                                    ctx.drawImage(image, 0, 0, newWidth, newHeight);
+
+                                    originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                                    applyChanges(); // Apply changes automatically after loading
+                                };
+                                image.src = e.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+
+                    // Apply color filtering
+                    function applyChanges() {
+                        if (!originalImageData) return;
+
+                        const red = document.getElementById('toggleRed').checked;
+                        const green = document.getElementById('toggleGreen').checked;
+                        const blue = document.getElementById('toggleBlue').checked;
+
+                        let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                        let data = imgData.data;
+
+                        for (let i = 0; i < data.length; i += 4) {
+                            let r = data[i];
+                            let g = data[i + 1];
+                            let b = data[i + 2];
+
+                            const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+
+                            if (red) data[i] = gray;
+                            if (green) data[i + 1] = gray;
+                            if (blue) data[i + 2] = gray;
+                        }
+
+                        ctx.putImageData(imgData, 0, 0);
+                    }
+
+                    // Reset and reapply changes when checkboxes change
+                    function updateImage() {
+                        if (originalImageData) {
+                            ctx.putImageData(originalImageData, 0, 0);
+                            applyChanges();
+                        }
+                    }
+
+                    // Event Listeners for checkboxes
+                    document.getElementById('toggleRed').addEventListener('change', updateImage);
+                    document.getElementById('toggleGreen').addEventListener('change', updateImage);
+                    document.getElementById('toggleBlue').addEventListener('change', updateImage);
+                };
+            </script>
+            </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+
+
+
+            
+        <section class="section cataractssection">
+        <h2>Cataracts</h2>
+
+        <p>One of the most important parts of our eyes that lets us see is the lens. Cataracts make these lens cloudy,
+            impairing our vision. As we grow older, the proteins in our eyes start breaking down and clumping up, clouding up the lens, and causing cataracts. Cataracts make your vision blurry, cloudy, and less colorful. These impaired lenses can
+            sometimes also lead to issues with light sensitivity. Below is an image which shows the difference between a
+            healthy lens and a cataract lens. </p>
+
+        <center><img src="https://www.aao.org/image.axd?id=61a854aa-ba51-41ba-9ba0-d4a74c3bfb06&t=636407391322630000"
+                alt="alternatetext" height='450' width='360'> </center>
+
+
+
+
+
+        <h2>Seeing the effects of Glaucoma and Cataracts on an Image</h2>
+        <style>
+            #image-container {
+                position: relative;
+                display: inline-block;
+            }
+
+            #uploaded-image {
+                max-width: 100%;
+                height: auto;
+                transition: filter 0.3s ease;
+            }
+
+            .glaucoma-effect {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.7);
+                mask-image: radial-gradient(circle, transparent 40%, black 60%);
+                -webkit-mask-image: radial-gradient(circle, transparent 40%, black 60%);
+                pointer-events: none;
+            }
+
+            .slidecontainer {
+                margin-top: 20px;
+            }
+        </style>
+        </head>
+
+        <body>
+            <center>
+                <input type="file" id="file-input" accept="image/*">
+                <div id="image-container">
+                    <img id="uploaded-image" src="" alt="">
+                    <div class="glaucoma-effect" id="glaucoma-effect"></div>
+                </div>
+            </center>
+            <center>
+                <p>Select an effect:</p>
+                <input type="radio" id="glaucoma" name="effect" value="glaucoma" checked>
+                <label for="glaucoma">Glaucoma</label>
+                <input type="radio" id="cataract" name="effect" value="cataract">
+                <label for="cataract">Cataract</label>
+            </center>
+            <center>
+                <label for="myRange">Adjust the severity of the effect using the slider.</label>
+            </center>
+            <center>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+                    <p>Effect Level: <span id="severityText">Mild</span></p>
+                </div>
+            </center>
+            </section>
+            <script>
+                const fileInput = document.getElementById('file-input');
+                const uploadedImage = document.getElementById('uploaded-image');
+                const glaucomaEffect = document.getElementById('glaucoma-effect');
+                const slider = document.getElementById("myRange");
+                const severityText = document.getElementById("severityText");
+                const effectRadios = document.getElementsByName("effect");
+
+                function updateEffect() {
+                    const effect = document.querySelector('input[name="effect"]:checked').value;
+                    const severity = slider.value;
+
+                    if (effect === "glaucoma") {
+                        let clearCircleSize = 50 - severity * 0.4;
+                        glaucomaEffect.style.maskImage = `radial-gradient(circle, transparent ${clearCircleSize}%, black 80%)`;
+                        glaucomaEffect.style.webkitMaskImage = `radial-gradient(circle, transparent ${clearCircleSize}%, black 80%)`;
+                        glaucomaEffect.style.display = 'block';
+                        uploadedImage.style.filter = "none";
+                    } else if (effect === "cataract") {
+                        uploadedImage.style.filter = `blur(${severity / 10}px) brightness(${1 - severity * 0.005})`;
+                        glaucomaEffect.style.display = 'none';
+                    }
+
+                    severityText.innerText = severity <= 20 ? "Mild" : severity <= 60 ? "Moderate" : "Severe";
+                }
+
+                fileInput.addEventListener('change', function (e) {
+                    const file = e.target.files[0];
+                    if (file && file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function (event) {
+                            uploadedImage.src = event.target.result;
+                            uploadedImage.style.display = 'block';
+                            uploadedImage.onload = updateEffect;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert("Please select a valid image file.");
+                    }
+                });
+
+                slider.oninput = updateEffect;
+                effectRadios.forEach(radio => radio.addEventListener("change", updateEffect));
+
+                updateEffect();
+            </script>
+
+
+
+
+            <section class="awarenesssection">
+            <h2>Raising Awareness Through Art</h2>
+            <p>Below, we provide some tools to help new artists create artworks incorporating visual disabilities or raising awareness!</p>
+
+            <p>Choose colors you would like to incorporate into your art. The colors we have provided allow people with
+                all
+                visual disabilities to experience art. We have not provided red, green, blue, and yellow, as those who
+                are
+                colorblind are not able to see those colors.</p>
+
+            <center>
+                <select id="color1" onchange="updateColors()">
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Turquoise">Turquoise</option>
+                    <option value="Orange">Orange</option>
+                </select>
+            </center>
+
+            <center>
+                <select id="color2" onchange="updateColors()">
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Turquoise">Turquoise</option>
+                    <option value="Orange">Orange</option>
+                </select>
+            </center>
+
+            <center>
+                <select id="color3" onchange="updateColors()">
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Purple">Purple</option>
+                    <option value="Turquoise">Turquoise</option>
+                    <option value="Orange">Orange</option>
+                </select>
+            </center>
+
+            <p>Choose the visual disability you would like to incorporate</p>
+
+            <center>
+                <select id="disability">
+                    <option value="Glaucoma">Glaucoma</option>
+                    <option value="Colorblindness">Colorblindness</option>
+                    <option value="Cataracts">Cataracts</option>
+                </select>
+            </center>
+
+
+            <center>
+                <button onclick="logSelection(event)">Enter</button>
+            </center>
+            </section>
+            <!-- This is where the generated statement will appear -->
+            <div id="generatedStatement"></div>
+
+            <script>
+                // Function to update the colors and generate the statement
+                function updateColors() {
+                    const color1 = document.getElementById("color1").value;
+                    const color2 = document.getElementById("color2").value;
+                    const color3 = document.getElementById("color3").value;
+
+                    const colorOptions = [color1, color2, color3];
+
+                    // Create a unique identifier for the selected color combination
+                    const colorCombinations = colorOptions.sort().join("-");  // Sort colors to ensure consistency
+
+                    // Combine the colors and disability into one unique key
+                    const combinationKey = `${colorCombinations}`;
+
+                    // Disable the already selected colors in other dropdowns
+                    updateSelect("color1", color2, color3);
+                    updateSelect("color2", color1, color3);
+                    updateSelect("color3", color1, color2);
+                }
+
+                // Function to disable options in the select dropdown
+                function updateSelect(selectId, color1, color2) {
+                    const select = document.getElementById(selectId);
+                    for (let option of select.options) {
+                        option.disabled = option.value === color1 || option.value === color2;
+                    }
+                }
+
+                // Function to generate the statement based on selected values
+                function generateStatement(colors, disability) {
+                    let statement = '';
+
+                    // Example of how to create combinations based on selected colors and disability
+                    if (disability === 'Glaucoma') {
+                        if (colors === 'Black-Orange-Turquoise') {
+                            statement = 'For glaucoma, the visual experience is often blurry and dimmed. The combination of black, orange, and turquoise helps simulate the distortion and reduced contrast that individuals with glaucoma may face. To improve accessibility, consider increasing contrast and clarity in your artwork. Adding bolder outlines and making elements larger can help people with glaucoma see your work more clearly. Additionally, you might want to avoid overly fine details, as they can be harder to discern.';
+                        } else if (colors === 'White-Purple-Orange') {
+                            statement = 'This combination, featuring white, purple, and orange, creates strong contrast while mimicking the high contrast visual world of those with glaucoma. For greater accessibility, it is important to ensure that your artwork’s colors are distinct enough for individuals with reduced contrast sensitivity. Consider using thicker lines and avoiding color gradients that may blend too seamlessly. Additionally, providing descriptions of the colors or elements in the artwork may help those with glaucoma better understand your work.';
+                        } else if (colors === 'Black-White-Orange') {
+                            statement = 'The stark contrast of black and white, with a dash of orange, reflects the fluctuating contrast vision changes seen in glaucoma. To make this artwork more accessible to those with glaucoma, you could consider adding textures or patterns that guide the viewer’s eye. Clear visual cues, such as bold shapes or borders, help individuals with low vision interpret the layout more easily. Additionally, you might add high-contrast labeling or explain the scene for those who struggle with color differentiation.';
+                        } else {
+                            statement = `The colors ${colors.replace("-", ", ")} symbolize the gentle alteration of vision seen in glaucoma. To increase accessibility, you could experiment with varying shapes, textures, or even tactile elements, such as embossing or raised surfaces. Incorporating visual elements that emphasize contrast and removing overly intricate or subtle details could help individuals with glaucoma engage better with the artwork.`;
+                        }
+                    } else if (disability === 'Colorblindness') {
+                        if (colors === 'Purple-Turquoise-Black') {
+                            statement = 'The combination of purple, turquoise, and black provides a good contrast for individuals with certain types of colorblindness, such as Deuteranopia (red-green colorblindness). To improve accessibility, ensure there is enough differentiation between colors in the image. Avoid relying too heavily on color as the only method of differentiation. Use shapes, patterns, or textures to further distinguish elements in the artwork, which will help individuals with colorblindness understand the visual structure more easily.';
+                        } else if (colors === 'Black-White-Turquoise') {
+                            statement = 'This combination of black, white, and turquoise can be especially effective for those with Protanopia or Deuteranopia (types of red-green colorblindness), as it avoids problematic red-green tones. When designing for colorblindness, always aim for high contrast, as people with these conditions may not differentiate between low-contrast colors. Additionally, using clear labels or visual cues (e.g., icons or patterns) can ensure that individuals with colorblindness can accurately interpret your artwork.';
+                        } else if (colors === 'Black-White-Orange') {
+                            statement = 'Black, white, and orange are a strong combination that contrasts well for people with color vision deficiencies. However, some individuals with colorblindness may still struggle with orange, depending on the type. To further enhance accessibility, it’s helpful to add descriptive text or other visual elements that guide the viewer, ensuring they can distinguish the important parts of your piece. This can be especially helpful in design or art where the information is conveyed through color alone.';
+                        } else {
+                            statement = `The color combination ${colors.replace("-", ", ")} can be adapted for accessibility in colorblindness. When working with colorblind individuals in mind, it’s essential to choose color pairs that contrast sharply. Using additional markers such as symbols or text ensures that people with color vision impairments can still enjoy and understand the work.`;
+                        }
+                    } else if (disability === 'Cataracts') {
+                        if (colors === 'Orange-Turquoise-White') {
+                            statement = 'For individuals with cataracts, the vision may seem cloudy or foggy, making it difficult to distinguish between colors. The combination of orange, turquoise, and white offers sufficient contrast but may still benefit from a higher saturation of colors to compensate for the cloudiness. To make your artwork more accessible, use strong contrasts and avoid overly bright or pale colors that may fade into the background. Additionally, consider using bolder patterns or textures to make the artwork stand out more clearly.';
+                        } else if (colors === 'Black-Purple-Turquoise') {
+                            statement = 'This combination of dark purple and turquoise with black works well for individuals with cataracts, as they may struggle with bright light and color clarity. For better accessibility, it’s recommended to use high-contrast elements, especially for backgrounds, as cataract patients may experience issues with visual clarity. Avoid excessive light sources or glare in your artwork that could make it harder to see the details clearly.';
+                        } else if (colors === 'Black-White-Orange') {
+                            statement = 'The combination of black, white, and orange helps to contrast distinctively for individuals with cataracts, who may perceive blurry vision or muted colors. To make this artwork even more accessible, you could add textures or raised features that allow individuals to feel the artwork. Clear boundaries between shapes and a lack of excessive brightness will make your work easier to interpret for those with cataracts.';
+                        } else {
+                            statement = `The combination ${colors.replace("-", ", ")} can represent the blurred and muted vision typical of cataracts. To enhance accessibility, consider using larger elements, clear lines, and avoid excessive details that might be lost to someone with cataracts. High contrast can help in maintaining visibility, and reducing light glare within the piece is key.`;
+                        }
+                    }
+
+                    return statement;
+                }
+
+                // Function to log the selected values and display the advice
+                function logSelection(event) {
+                    event.preventDefault(); // Prevents the form submission or page refresh
+
+                    const color1 = document.getElementById("color1").value;
+                    const color2 = document.getElementById("color2").value;
+                    const color3 = document.getElementById("color3").value;
+                    const disability = document.getElementById("disability").value;
+
+                    // Combine the colors into one string
+                    const colorOptions = [color1, color2, color3];
+                    const colorCombinations = colorOptions.sort().join("-");  // Sorting ensures consistency
+
+                    // Generate the statement based on the selected values
+                    let statement = generateStatement(colorCombinations, disability);
+
+                    // Check if the statement was generated successfully
+                    if (statement) {
+                        document.getElementById("generatedStatement").innerText = statement;
+                    } else {
+                        document.getElementById("generatedStatement").innerText = "There was an error generating the statement.";
+                    }
+
+                    // Optionally, log to console or do further actions
+                    console.log(`Logged: Colors - ${colorCombinations}, Disability - ${disability}`);
+                }
+            </script>
+
+<section class="footer">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>© 2025 OtherLens</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</form>
+
+</html>
