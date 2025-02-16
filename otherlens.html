@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otherlens</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <h1>Welcome to Otherlens!</h1>
+    <p>See the world through other's eyes</p>
+
+    
+    <p>Welcome to Other Lens. We are a website dedicated to improving awareness of visual disabilities. The three visual disabilities that we focus on are Colorblindness, Cataracts, and Glaucoma. Visual disabilities affect a large portion of the global population. However, many people are not aware of these disabilities, and often, there are many misconceptions. Our website aims to answer these questions and grow awareness of visual disabilities and how they affect those who have them.</p>
+
+
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        
+
+    
+    <p>
+        <h2>About Otherlens: Our Mission</h2>
+        <p>At otherlens, we want people to what the world looks like through, well, other lenses! We want to raise awareness on how people with different visual disabilities see the world. By doing this, not only are we clearing up misconceptions about visual disabilties, but we are giving people a vessel to reach people with visual disabilities, and help raise awareness. For example, artists can use our website to create artworks reaching out to the visually disabled or raise awarness through their art. </p>
+
+
+        
+    </p>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+
+
+  <form> 
+
+    
+      
+
+
+
+      <h2>Glaucoma</h2>
+      <p>Our eyes are constantly creating a liqud called the 'aqeous humour'. As new liquid flows into
+      our eyes, the old liquid usually drains out, through an area called the 'drainage angle'. This process keeps our eye pressure stable, allowing our eyes to function properly. If the drainage angle
+      is not working correctly, it creates a fluid buildup, which increases the pressure inside the eye,  ultimately damaging the optic nerve. As the nerve fibers within the optic nerve die out, it affects tehe quality of the vision, blinding more and more areas out. </p>
+
+
+
+      <center><img src="https://static.wixstatic.com/media/09fea1_2d66a61091cb409482e30ef9cce7eeaa~mv2.gif" alt="alternatetext" height = '200' width ='360'> </center>
+
+
+
+      
+ <center>
+     <label for "name"> Enter a prompt in the textbox below:</label> 
+ </center>
+      <p>Once the image is generated, you can also see how different levels of severity affect vision, by using the severity slider:</p>
+
+      <center>
+        <div class="slidecontainer">
+          <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
+          <p>Severity Level: <span id="severityText">None</span></p>
+        </div>
+        <button onclick="sendPrompt()">Generate AI Response</button>
+      </center>
+
+      <div id="aiResult"></div>
+
+      <script>
+        const slider = document.getElementById("myRange");
+        const severityText = document.getElementById("severityText");
+
+          
+        const severityLevels = [
+          { range: [1, 20], severity: "Mild Severity" },
+          { range: [21, 40], severity: "Moderate Severity" },
+          { range: [41, 60], severity: "High Severity" },
+          { range: [61, 80], severity: "Severe Glaucoma" },
+          { range: [81, 100], severity: "Extreme Severity" },
+        ];
+
+        
+        slider.oninput = function () {
+          let severity = "None";
+          for (let level of severityLevels) {
+            if (this.value >= level.range[0] && this.value <= level.range[1]) {
+              severity = level.severity;
+              break;
+            }
+          }
+          severityText.innerText = severity;
+        };
+
+        // Function to send the severity and get AI response
+        function sendPrompt() {
+          const severity = severityText.innerText;
+          fetch('/generate', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ severity: severity }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById('aiResult').innerText = data.result;
+          })
+          .catch(error => console.error('Error:', error));
+        }
+      </script>
+
+
+
+
+
+
+      
+      
+    <br>
+       <center>  <input type="text" id="glaucoma" placeholder="i.e. Image of a dog through the lens of someone with glaucoma"></center>
+
+
+      
+      <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      <br>
+
+      <h2>Colorblindness</h2>
+      <p>Those with colorblindness see colors different than those without it.Colorblindness makes it hard to tell the difference between certain colors. Within our eyes, there are different types off cells called rods and cones which detect light. Cone cells are the ones which help us distinguish different colors. Color blindness occurs when when one or more cone cells are absent. The severity of the colorblindness depends on the amount of cone cells missing. There are three different degrees of colorblindness. Some people with mild color blindness usually see colors in good lighting, but struggle to see colors in dimmer or worse lighting. Others cannot tell apart certain colors, such as red, green and blue, in any light. The most severe degree of color blindness is when a person sees everything in gray. However, this is uncommon.   </p>
+
+      <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        <br>
+      
+
+
+      <h1>Colorblindness Simulator</h1>
+      <p>Below, we have provided a way for you to see how colorblind people see the world. You can eliminate different colors in the image. Eliminating all three colors will make the image completely gray. </p>
+
+      <!-- Canvas for Image -->
+      <div class="canvas-container">
+          <canvas id="imageCanvas"></canvas>
+      </div>
+<center>
+      <div class="controls">
+          <label><input type="checkbox" id="toggleRed"> Eliminate Red</label><br>
+          <label><input type="checkbox" id="toggleGreen"> Eliminate Green</label><br>
+          <label><input type="checkbox" id="toggleBlue"> Eliminate Blue</label><br>
+          <button id="applyChangesButton">Apply Changes</button>
+      </div>
+    </center>
+   
+      
+      <style>
+          .canvas-container {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-top: 20px;
+          }
+      </style>
+
+      <script>
+          window.onload = function () {
+              const image = new Image();
+              image.crossOrigin = "Anonymous";  
+              image.src = "https://upload.wikimedia.org/wikipedia/commons/f/fe/WSU_Health_Sciences_Spokane_campus_2015.jpg"; 
+              const canvas = document.getElementById('imageCanvas');
+              const ctx = canvas.getContext('2d');
+              let originalImageData = null;
+
+
+              image.onload = function () {
+                  console.log("Image loaded successfully");
+
+                  
+                  const maxWidth = 500;
+                  const aspectRatio = image.width / image.height;
+                  const newWidth = maxWidth;
+                  const newHeight = newWidth / aspectRatio;
+
+                  
+                  canvas.width = newWidth;
+                  canvas.height = newHeight;
+
+                 
+                  ctx.drawImage(image, 0, 0, newWidth, newHeight);
+
+                  
+                  originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+              };
+
+              image.onerror = function () {
+                  console.error("Failed to load image. Check the URL.");
+                  alert("Failed to load image. Check the URL.");
+              };
+
+        
+              document.getElementById('applyChangesButton').addEventListener('click', function (event) {
+                  event.preventDefault(); 
+
+                  applyChanges(); 
+              });
+
+              function applyChanges() {
+                  const red = document.getElementById('toggleRed').checked;
+                  const green = document.getElementById('toggleGreen').checked;
+                  const blue = document.getElementById('toggleBlue').checked;
+
+                  // If original image data exists, modify the image
+                  if (originalImageData) {
+                      let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                      let data = imgData.data;
+
+                    
+                      for (let i = 0; i < data.length; i += 4) {
+                          let r = data[i];     // Red
+                          let g = data[i + 1]; // Green
+                          let b = data[i + 2]; // Blue
+
+                         
+                          const gray = 0.299 * r + 0.587 * g + 0.114 * b;
+
+                          if (red) {
+                              data[i] = gray;  
+                          }
+
+                          if (green) {
+                              data[i + 1] = gray; 
+                          }
+
+                          if (blue) {
+                              data[i + 2] = gray; 
+                          }
+                      }
+
+                      
+                      ctx.putImageData(imgData, 0, 0);
+                  }
+              }
+
+              
+              function resetImage() {
+                  if (originalImageData) {
+                      ctx.putImageData(originalImageData, 0, 0);
+                  }
+              }
+
+            
+              document.getElementById('toggleRed').addEventListener('change', resetImage);
+              document.getElementById('toggleGreen').addEventListener('change', resetImage);
+              document.getElementById('toggleBlue').addEventListener('change', resetImage);
+          };
+      </script>
+
+
+  
+
+        <br>
+          <br>
+          <br>
+          <br>
+          <br>
+        <br>
+
+      <h2>Cataracts</h2>
+
+      <p>One of the most important parts of our eyes that lets us see is the lens. Cataracts make these lens cloudy, impairing our vision. It makes your vision blurry, cloudy, and less colorful. These impaired lenses can sometimes also lead to issues with light sensitivity. </p>
+
+
+      <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      <br>
+
+<h2>Raising Awareness Through Art</h2>
+      <p>Below, we provide some tools to help new artists create artworks incorporating visual disabilities or raising awareness!  </p>
+
+<p>Choose colors you would like to incorporate into your art. The colors we have provided allow people with all visual disabilities to experience art. We have not provided red, green, blue, and yellow, as those who are colorblind are not able to see those colors. </p>
+
+    <center><select>
+        <option value="option1">Black</option>
+        <option value="option2">White</option>
+        <option value="option3">Purple</option>
+        <option value="option4">Turquoise</option>
+        <option value="option5">Orange</option>
+      </select></center>
+
+      <center><select>
+          <option value="option1">Black</option>
+          <option value="option2">White</option>
+          <option value="option3">Purple</option>
+          <option value="option4">Turquoise</option>
+          <option value="option5">Orange</option>
+        </select></center>
+
+
+      <center><select>
+              <option value="option1">Black</option>
+              <option value="option2">White</option>
+              <option value="option3">Purple</option>
+              <option value="option4">Turquoise</option>
+              <option value="option5">Orange</option>
+            </select></center>
+
+<p> Choose the visual disability you would like to incorporate</p>
+      <center><select>
+          <option value="option1">Glaucoma</option>
+          <option value="option2">Colorblindness</option>
+          <option value="option3">Cataracts</option>
+        </select></center>
+
+<p>Type in other things you would like to include, and generative AI will give you a few ideas to incorporate into your artwork</p>
+
+
+       <center>  <input type="text" id="AI Prompt" placeholder="i.e. Have it be abstract...include geometric shapes"></center>
+
+      
+    
+      
+  </form>
+</html> 
