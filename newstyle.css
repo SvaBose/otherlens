@@ -1,99 +1,102 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-    line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.6;
 }
 
 h1, h2, h3 {
-    margin: 0; 
-    padding: 0;
+  margin: 0; 
+  padding: 0;
 }
 
 a { 
-    text-decoration: 0;
+  text-decoration: 0;
 }
 
 .herosection {
-    background: url('https://images.pexels.com/photos/6116717/pexels-photo-6116717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #f9f9f9;
-    text-align: center;
+  background: url('https://images.pexels.com/photos/6116717/pexels-photo-6116717.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #f9f9f9;
+  text-align: center;
 }
 
 .herocontent h1 {
-    font-size: 3em;
-    margin-bottom: 1em;
+  font-size: 3em;
+  margin-bottom: 1em;
 }
 
 .subtitle {
-    font-size: 1.5em;
-    margin-bottom: 2em;
+  font-size: 1.5em;
+  margin-bottom: 2em;
 }
 
 .learnbutton {
-    background: #ff5a5f;
-    color: #fff;
-    padding: 1em 2em;
-    border-radius: 5px;
-    font-size: 1.2em;
-    transition: background 0.3s ease;
+  background: #ff5a5f;
+  color: #fff;
+  padding: 1em 2em;
+  border-radius: 5px;
+  font-size: 1.2em;
+  transition: background 0.3s ease;
 }
 
 .learnbutton:hover {
-    background: #e04e50;
+  background: #e04e50;
 }
 
 .section {
-    font-size: 1.5rem;
-    padding: 4em 2em;
-    text-align: center;
+  font-size: 1.5rem;
+  padding: 4em 2em;
+  text-align: center;
 }
 
 .missionsection {
-    background: #f9f9f9;
-    font-size: 1.5em;
-    padding: 4em 2em;
-    text-align: center;
+  background: #f9f9f9;
+  font-size: 1.5em;
+  padding: 4em 2em;
+  text-align: center;
 
 }
 .glaucomasection {
-    font-size: 1.5em;
-    padding: 0em 2em;
-    text-align: center;
+  font-size: 1.5em;
+  padding: 0em 2em;
+  text-align: center;
 }
 
 .colorblindsection {
-    background: #f9f9f9;
-    font-size: 1.5em;
-    padding: 4em 2em;
-    text-align: center;
+  background: #f9f9f9;
+  font-size: 1.5em;
+  padding: 4em 2em;
+  text-align: center;
 }
 .colorblindsimsection{
-    font-size: 1.5em;
-    padding: 0em 2em;
-    text-align: center;
+  font-size: 1.5em;
+  padding: 0em 2em;
+  text-align: center;
 }
+
 .cataractssection {
-    background: #f9f9f9;
+  background: #f9f9f9;
 
 }
-.awarenesssection{
-    font-size: 1.5em;
-    padding: 0em 2em;
-    text-align: center;
+
+.awarenesssection {
+  font-size: 1.5rem; /* Instead of em */
 }
+
+
+
 .glaucomasection, .art-section, .colorblindsimsection {
-    background: #fff;
+  background: #fff;
 }
 
 .footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: .5em 0;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: .5em 0;
 }
