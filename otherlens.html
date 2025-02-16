@@ -310,44 +310,84 @@
         <br>
       <br>
 
-<h2>Raising Awareness Through Art</h2>
-      <p>Below, we provide some tools to help new artists create artworks incorporating visual disabilities or raising awareness!  </p>
+      <h2>Raising Awareness Through Art</h2>
+      <p>Below, we provide some tools to help new artists create artworks incorporating visual disabilities or raising awareness!</p>
 
-<p>Choose colors you would like to incorporate into your art. The colors we have provided allow people with all visual disabilities to experience art. We have not provided red, green, blue, and yellow, as those who are colorblind are not able to see those colors. </p>
+      <p>Choose colors you would like to incorporate into your art. The colors we have provided allow people with all visual disabilities to experience art. We have not provided red, green, blue, and yellow, as those who are colorblind are not able to see those colors.</p>
 
-    <center><select>
-        <option value="option1">Black</option>
-        <option value="option2">White</option>
-        <option value="option3">Purple</option>
-        <option value="option4">Turquoise</option>
-        <option value="option5">Orange</option>
-      </select></center>
+      <center>
+          <select id="color1" onchange="updateColors()">
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+              <option value="Purple">Purple</option>
+              <option value="Turquoise">Turquoise</option>
+              <option value="Orange">Orange</option>
+          </select>
+      </center>
 
-      <center><select>
-          <option value="option1">Black</option>
-          <option value="option2">White</option>
-          <option value="option3">Purple</option>
-          <option value="option4">Turquoise</option>
-          <option value="option5">Orange</option>
-        </select></center>
+      <center>
+          <select id="color2" onchange="updateColors()">
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+              <option value="Purple">Purple</option>
+              <option value="Turquoise">Turquoise</option>
+              <option value="Orange">Orange</option>
+          </select>
+      </center>
+
+      <center>
+          <select id="color3" onchange="updateColors()">
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+              <option value="Purple">Purple</option>
+              <option value="Turquoise">Turquoise</option>
+              <option value="Orange">Orange</option>
+          </select>
+      </center>
+
+      <p>Choose the visual disability you would like to incorporate</p>
+
+      <center>
+          <select>
+              <option value="Glaucoma">Glaucoma</option>
+              <option value="Colorblindness">Colorblindness</option>
+              <option value="Cataracts">Cataracts</option>
+          </select>
+      </center>
+
+      <p>Type in other things you would like to include, and generative AI will give you a few ideas to incorporate into your artwork</p>
+
+      <script>
+      function updateColors() {
+          const color1 = document.getElementById("color1").value;
+          const color2 = document.getElementById("color2").value;
+          const color3 = document.getElementById("color3").value;
+
+          const colorOptions = ["Black", "White", "Purple", "Turquoise", "Orange"];
+
+          // Function to update options in a select dropdown
+          function updateSelect(selectId, selectedColor) {
+              const select = document.getElementById(selectId);
+              for (let option of select.options) {
+                  option.disabled = option.value === selectedColor || 
+                                    option.value === color1 || 
+                                    option.value === color2 || 
+                                    option.value === color3;
+              }
+          }
+
+          updateSelect("color1", color2);
+          updateSelect("color1", color3);
+          updateSelect("color2", color1);
+          updateSelect("color2", color3);
+          updateSelect("color3", color1);
+          updateSelect("color3", color2);
+      }
+      </script>
 
 
-      <center><select>
-              <option value="option1">Black</option>
-              <option value="option2">White</option>
-              <option value="option3">Purple</option>
-              <option value="option4">Turquoise</option>
-              <option value="option5">Orange</option>
-            </select></center>
+      
 
-<p> Choose the visual disability you would like to incorporate</p>
-      <center><select>
-          <option value="option1">Glaucoma</option>
-          <option value="option2">Colorblindness</option>
-          <option value="option3">Cataracts</option>
-        </select></center>
-
-<p>Type in other things you would like to include, and generative AI will give you a few ideas to incorporate into your artwork</p>
 
 
       
