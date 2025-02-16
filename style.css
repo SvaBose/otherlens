@@ -1,0 +1,71 @@
+:root{
+
+  color-scheme: white; 
+}
+
+body { 
+
+  font-family: Georgia, serif;
+  background-color: #feffff;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+h1 {
+  color: #3e8ef4;
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+h2 {
+  color: #3e8ef4;;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+p {
+  color: black;
+  font-size: 1em;
+  max-width: 600px;
+  margin: 10px auto;
+  line-height: 1.5;
+}  
+
+
+input[type="text"] {
+  width: 80%;               /* Adjust the width as needed */
+  padding: 12px;
+  margin: 10px auto;
+  font-size: 1.2em;         /* Slightly larger text for readability */
+  color: #888;              /* Light gray color for text */
+  font-weight: lighter;     /* Lighter font weight */
+  background-color: #f4f4f4;
+  border: 2px solid #ccc;   /* Subtle border color */
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: 2px solid #3e8ef4;  /* Blue border when focused */
+  color: #333;                 /* Darker text on focus */
+}
+
+input[type="text"]::placeholder {
+  color: #bbb;              /* Lighter placeholder text */
+  font-weight: lighter;     /* Lighter font for the placeholder */
+}
+input[type="text"] {
+
+  height: 10px;
+  
+}
+
+
+
+
