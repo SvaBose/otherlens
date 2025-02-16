@@ -62,61 +62,78 @@
 
       
  <center>
-     <label for "name"> Enter a prompt in the textbox below:</label> 
+     <label for "name"> You can change the severity of the glaucoma using the slider. </label> 
  </center>
-      <p>Once the image is generated, you can also see how different levels of severity affect vision, by using the severity slider:</p>
+      
 
       <center>
-        <div class="slidecontainer">
-          <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
-          <p>Severity Level: <span id="severityText">None</span></p>
-        </div>
-        <button onclick="sendPrompt()">Generate AI Response</button>
+          <div class="slidecontainer">
+              <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
+              <p>Severity Level: <span id="severityText">Mild Severity</span></p>
+          </div>
+
+          <script>
+              const slider = document.getElementById("myRange");
+              const severityText = document.getElementById("severityText");
+
+              const severityLevels = [
+                  { range: [1, 20], severity: "Mild Severity" },
+                  { range: [21, 40], severity: "Moderate Severity" },
+                  { range: [41, 60], severity: "High Severity" },
+                  { range: [61, 80], severity: "Severe Glaucoma" },
+                  { range: [81, 100], severity: "Extreme Severity" },
+              ];
+
+              // Initialize the severity text based on the initial slider value
+              function updateSeverity() {
+                  let severity = "None";
+                  for (let level of severityLevels) {
+                      if (slider.value >= level.range[0] && slider.value <= level.range[1]) {
+                          severity = level.severity;
+                          break;
+                      }
+                  }
+                  severityText.innerText = severity;
+              }
+
+              // Call it once to set initial severity text
+              updateSeverity();
+
+              slider.oninput = updateSeverity;
+          </script>
       </center>
 
-      <div id="aiResult"></div>
+
+      <center>
+        <button onclick="triggerFileUpload()">Upload Image</button>
+        <input type="file" id="fileInput" style="display: none;" accept="image/*">
+        <br>
+        <div id="fileName"></div>
+        <br>
+        <img id="imagePreview" style="max-width: 300px; display: none;">
+      </center>
 
       <script>
-        const slider = document.getElementById("myRange");
-        const severityText = document.getElementById("severityText");
-
-          
-        const severityLevels = [
-          { range: [1, 20], severity: "Mild Severity" },
-          { range: [21, 40], severity: "Moderate Severity" },
-          { range: [41, 60], severity: "High Severity" },
-          { range: [61, 80], severity: "Severe Glaucoma" },
-          { range: [81, 100], severity: "Extreme Severity" },
-        ];
-
-        
-        slider.oninput = function () {
-          let severity = "None";
-          for (let level of severityLevels) {
-            if (this.value >= level.range[0] && this.value <= level.range[1]) {
-              severity = level.severity;
-              break;
-            }
-          }
-          severityText.innerText = severity;
-        };
-
-        // Function to send the severity and get AI response
-        function sendPrompt() {
-          const severity = severityText.innerText;
-          fetch('/generate', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ severity: severity }),
-          })
-          .then(response => response.json())
-          .then(data => {
-            document.getElementById('aiResult').innerText = data.result;
-          })
-          .catch(error => console.error('Error:', error));
+        function triggerFileUpload() {
+          document.getElementById('fileInput').click();
         }
+
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            const fileName = file.name;
+            document.getElementById('fileName').innerText = `Selected file: ${fileName}`;
+
+            // Create an image preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              const imagePreview = document.getElementById('imagePreview');
+              imagePreview.src = e.target.result;
+              imagePreview.style.display = 'block'; // Show the image preview
+            };
+            reader.readAsDataURL(file);
+          }
+        });
       </script>
 
 
@@ -124,10 +141,12 @@
 
 
 
-      
-      
+
+
+
+
+
     <br>
-       <center>  <input type="text" id="glaucoma" placeholder="i.e. Image of a dog through the lens of someone with glaucoma"></center>
 
 
       
@@ -330,8 +349,6 @@
 
 <p>Type in other things you would like to include, and generative AI will give you a few ideas to incorporate into your artwork</p>
 
-
-       <center>  <input type="text" id="AI Prompt" placeholder="i.e. Have it be abstract...include geometric shapes"></center>
 
       
     
